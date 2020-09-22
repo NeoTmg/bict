@@ -1,0 +1,95 @@
+<!-- git init
+git commit -m "first commit"
+git remote add origin https://github.com/NeoTmg/bict.git
+git push -u origin master -->
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<form method="POST">
+		<label>Name :</name>
+	  <input type='text' name='name' id='name'>
+		<label>Email :</name>
+	  <input type='text' name='email' id='email'>
+	<label>Message :</name>
+	  <input type='text' name='msg' id='msg'>
+	  <img src="captcha.php">
+	  <input type="text" id="captcha">
+
+	</form>
+	<button onclick="myfun()">PHP AJAX</button>
+</body>
+</html>
+
+<script>
+	function myfun(){
+		//alert('test');
+		//get_method_xmlhtt();
+		//post_method_xmlhtt();
+		
+		$.ajax({
+			type : "POST",
+			url : "server.php",
+			data : {
+				'name' : $("#name").val(),
+				'email' : $("#email").val(),
+				'msg' : $("#msg").val(),
+				'cap' : $("#captcha").val()
+			},
+			success: function(res){
+				//$("#msg").val(res);
+				alert(res);
+				//document.write(res);
+			}
+		});
+
+		
+	}
+	
+	function get_method_xmlhtt(){
+		//getting form data
+		var name = document.getElementById('name');
+		var email = document.getElementById('email');
+		var msg = document.getElementById('msg');
+		
+		alert(name.value);
+	
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				alert(this.responseText);
+			}
+		}
+		
+		xmlhttp.open("GET", "server.php?name="+name.value+"&email="+email.value+"&msg="+msg.value,true);
+		xmlhttp.send();
+
+	}
+
+	function post_method_xmlhtt(){
+		//getting form data
+		var name = document.getElementById('name');
+		var email = document.getElementById('email');
+		var msg = document.getElementById('msg');
+		
+
+	
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				alert(this.responseText);
+			}
+		}
+		
+		xmlhttp.open("POST", "server.php",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var data = "name="+name.value+"&email="+email.value+"&msg="+msg.value;
+		xmlhttp.send(data);
+
+	}
+	
+	
+
+
+</script>
